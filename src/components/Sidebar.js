@@ -5,6 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import SubMenu from './SubMenu';
+import { IconContext } from 'react-icons';
 
 const Nav = styled.div`
   background: #15171c;
@@ -47,21 +48,23 @@ export default function Sidebar() {
 
   return (
     <>
-      <Nav>
-        <NavIcon to='#'>
-          <FaIcons.FaBars onClick={showSidebar} />
-        </NavIcon>
-      </Nav>
-      <SidebarNav sidebar={sidebar}>
-        <SidebarWrap>
+      <IconContext.Provider value={{ color: '#fff' }}>
+        <Nav>
           <NavIcon to='#'>
-            <AiIcons.AiOutlineClose onClick={showSidebar} />
+            <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
-          {SidebarData.map((item, index) => {
-            return <SubMenu item={item} key={index} />;
-          })}
-        </SidebarWrap>
-      </SidebarNav>
+        </Nav>
+        <SidebarNav sidebar={sidebar}>
+          <SidebarWrap>
+            <NavIcon to='#'>
+              <AiIcons.AiOutlineClose onClick={showSidebar} />
+            </NavIcon>
+            {SidebarData.map((item, index) => {
+              return <SubMenu item={item} key={index} />;
+            })}
+          </SidebarWrap>
+        </SidebarNav>
+      </IconContext.Provider>
     </>
   );
 }

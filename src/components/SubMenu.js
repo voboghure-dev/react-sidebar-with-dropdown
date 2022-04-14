@@ -7,9 +7,9 @@ const SidebarLink = styled(Link)`
   color: #e1e9fc;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   list-style: none;
-  height: 60px;
+  height: 50px;
   text-decoration: none;
   font-size: 18px;
 
@@ -21,6 +21,22 @@ const SidebarLink = styled(Link)`
 `;
 const SidebarLabel = styled.span`
   margin-left: 16px;
+`;
+
+const DropdownLink = styled(Link)`
+  background: #414757;
+  height: 60px;
+  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+
+  &:hover {
+    background: #632ce4;
+    cursor: pointer;
+  }
 `;
 
 export default function SubMenu({ item }) {
@@ -43,6 +59,15 @@ export default function SubMenu({ item }) {
             : null}
         </div>
       </SidebarLink>
+      {subnav &&
+        item.subNav.map((item, index) => {
+          return (
+            <DropdownLink to={item.path} key={index}>
+              {item.icon}
+              <SidebarLabel>{item.title}</SidebarLabel>
+            </DropdownLink>
+          );
+        })}
     </>
   );
 }
